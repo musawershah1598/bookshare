@@ -16,6 +16,6 @@ Route::group(["namespace" => "Api"], function () {
     Route::post("auth/register", "AuthController@register");
     Route::group(['middleware'=>"auth:api"],function(){
         Route::get('/user', "AuthController@getUser");
+        Route::put("/user","AuthController@updateUser");
     });
-    Route::put("/user","AuthController@updateUser");
 });
