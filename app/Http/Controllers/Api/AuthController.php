@@ -55,4 +55,28 @@ class AuthController extends Controller
         $success['user'] = Auth::user();
         return $request->user();
     }
+
+    public function updateUser(Request $request){
+        $validators = Validator::make($request->all(),[
+            "user_id"=>"required",
+            "name"=>"required|min:3",
+            "email"=>"required|email",
+            "phone"=>"required",
+            "gender"=>"required"
+        ]);
+        if($validators->fails()){
+            return response()->json($validators->errors()->all(),422);
+        }else{
+            $user = User::find($request->user_id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->gender = $request->gender;
+            $user->save();
+            $success['message'] = "Details Updated Successfully";
+            return response()->json($success,200);
+        }
+    }
+
+
 }
