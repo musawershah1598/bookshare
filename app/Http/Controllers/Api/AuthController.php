@@ -83,7 +83,7 @@ class AuthController extends Controller
     public function uploadimage(Request $request){
         $validation = Validator::make($request->all(),[
             'user_id'=>'required',
-            'image'=>"required|image|mimes: jpg,png,jpeg,gif|max:2048"
+            'image'=>"required"
         ]);
         if($validation->fails()){
             return response()->json($validation->errors()->all(),422);
@@ -94,9 +94,11 @@ class AuthController extends Controller
                     unlink(public_path("/profile_images/".$user->avatar));
                 }
             }
-            $file = $request->file('image');
-            $new_name = rand().".".$request->image->getClientOriginalExtension();
-            $file->move(public_path('profile_images'),$new_name);
+            $file = $request->image;
+            $file = str_replace('data:image/jpeg;base64,','', $file);
+            $file = str_replace(' ', '+', $file);
+            $new_name = rand()."."."jpg";
+            File::put(public_path("/profile_images/"),$new_name,\base64_decode($file));
             $user->avatar = $new_name;
             $user->save();
             $success['message'] = "Profile image updated successfully";
