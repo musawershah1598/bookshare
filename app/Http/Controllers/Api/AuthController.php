@@ -95,10 +95,8 @@ class AuthController extends Controller
                 }
             }
             $file = $request->image;
-            $file = str_replace('data:image/jpeg;base64,','', $file);
-            $file = str_replace(' ', '+', $file);
             $new_name = rand()."."."jpg";
-            File::put(public_path("/profile_images/"),$new_name,\base64_decode($file));
+            File::put(public_path("/profile_images/"),$new_name,\file_get_contents($file));
             $user->avatar = $new_name;
             $user->save();
             $success['message'] = "Profile image updated successfully";
