@@ -7,6 +7,8 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Validator;
+use Storage;
+use File;
 
 class AuthController extends Controller
 {
@@ -74,6 +76,31 @@ class AuthController extends Controller
             $user->gender = $request->gender;
             $user->save();
             $success['message'] = "Details Updated Successfully";
+            return response()->json($success,200);
+        }
+    }
+
+    public function uploadimage(Request $request){
+        $validation = Validator::make($request->all(),[
+            'user_id'=>'required',
+            'image'=>"required|image|mimes: jpg,png,jpeg,gif|max:2048"
+        ]);
+        if($validation->fails()){
+            return response()->json($validation->errors()->all(),422);
+        }else{
+            $user = User::where('id',$request->get('user_id'))->first();
+            if($user->avatar){
+                if(is_file(public_path("/profile_images/".$user->avatar))){
+                    unlink(public_path("/profile_images/".$user->avatar));
+                }
+            }
+            $file = $request->file('image');
+            $new_name = rand().".".$request->image->getClientOriginalExtension();
+            $file->move(public_path('profile_images'),$new_name);
+            $user->avatar = $new_name;
+            $user->save();
+            $success['message'] = "Profile image updated successfully";
+            $success['url'] = public_path("/profile_images/".$user->avatar);
             return response()->json($success,200);
         }
     }

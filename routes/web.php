@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return response()->json(['error' => "Invalid token."]);
+    return response()->json(['error' => "Invalid token."],400);
 })->name('login');
