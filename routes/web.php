@@ -13,8 +13,17 @@
 
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+
+// Route::get('/login', function () {
+//     return response()->json(['error' => "Invalid token."],400);
+// })->name('login');
+
+Auth::routes();
+
+Route::group(['middleware'=>"CheckForAdmin"],function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('genre',"GenreController");
+    Route::resource('book',"BookController");
 });
 
-Route::get('/login', function () {
-    return response()->json(['error' => "Invalid token."],400);
-})->name('login');

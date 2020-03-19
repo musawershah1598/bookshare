@@ -1,0 +1,13 @@
+body {
+    font-family: "Noto Sans", sans-serif;
+}
+
+.card:first-of-type {
+    margin-top: 5vh;
+}
+.form-control {
+    box-shadow: none !important;
+}
+.btn {
+    box-shadow: none !important;
+}
