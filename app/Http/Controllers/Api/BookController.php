@@ -11,7 +11,7 @@ class BookController extends Controller
 {
     // getting 10 books
     public function getbooks(){
-        $books = Book::limit(10)->get();
+        $books = Book::with("genres")->limit(10)->get();
         if($books){
             return response()->json($books,200);
         }else{
@@ -29,7 +29,7 @@ class BookController extends Controller
             $error['message'] = "No id is provided";
             return response()->json($error,400);
         }
-        $book = Book::where('id',$id)->first();
+        $book = Book::where('id',$id)->with("genres")->first();
         if($book){
             return response()->json($book,200);
         }else{
