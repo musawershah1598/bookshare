@@ -41,7 +41,7 @@ class BookController extends Controller
 
     public function search(Request $request){
         $term = $request->term;
-        $books = Book::where('title',"LIKE","%".$term."%")->orWhere('author',"LIKE","%".$term."%")->get();
+        $books = Book::where('title',"LIKE","%".$term."%")->orWhere('author',"LIKE","%".$term."%")->with('genre')->get();
         if(count($books) > 0){
             return response()->json($books,200);
         }else{
