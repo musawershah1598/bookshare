@@ -38,4 +38,15 @@ class BookController extends Controller
             return response()->json($error,404);
         }
     }
+
+    public function search(Request $request){
+        $term = $request->term;
+        $books = Book::where('title',"LIKE","%".$term."%")->orWhere('author',"LIKE","%".$term."%")->get();
+        if(count($books) > 0){
+            return response()->json($books,200);
+        }else{
+            $error['message'] = "No book or author found";
+            return response()->json($error,404);
+        }
+    }
 }
