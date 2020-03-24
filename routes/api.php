@@ -23,5 +23,6 @@ Route::group(["namespace" => "Api"], function () {
         Route::get('/book',"BookController@getbook");
         Route::get("/books","BookController@getbooks");
         Route::get("/books/search","BookController@search");
+		Route::get("/books/addview","BookController@addview");
     });
 });

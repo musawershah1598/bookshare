@@ -49,4 +49,11 @@ class BookController extends Controller
             return response()->json($error,404);
         }
     }
+	
+	public function addview(Request $request){
+		$book = Book::where('id',$request->id)->first();
+		$book->views = $book->views + 1;
+		$book->save();
+		return response()->json(['message'=>'working'],200);
+	}
 }
