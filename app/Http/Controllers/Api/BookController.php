@@ -56,4 +56,11 @@ class BookController extends Controller
 		$book->save();
 		return response()->json(['message'=>'working'],200);
 	}
+	
+	public function adddownload(Request $request){
+		$book = Book::where('id',$request->id)->first();
+		$book->downloads = $book->downloads + 1;
+		$book->save();
+		return response()->json(['message'=>'working'],200);
+	}
 }
