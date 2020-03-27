@@ -24,6 +24,10 @@ Route::group(["namespace" => "Api"], function () {
         Route::get("/books","BookController@getbooks");
         Route::get("/books/search","BookController@search");
 		Route::get("/books/addview","BookController@addview");
-		Route::get("/books/adddownload","BookController@adddownload");
+        Route::get("/books/adddownload","BookController@adddownload");
+
+        // reviews
+        Route::get("/review","ReviewController@getReviews");
+        Route::post("/review/create","ReviewController@create");
     });
 });

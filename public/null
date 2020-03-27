@@ -1,0 +1,7 @@
+Book::where('id',4)->reviews()->get();
+$book = Book:where('id',4)->first();
+$book = Book::where('id',4)->first();
+$book = Book::where('id',4)->first();
+$book->reviews()
+$book = Book::where('id',4)->first();
+$book->reviews()->get()
