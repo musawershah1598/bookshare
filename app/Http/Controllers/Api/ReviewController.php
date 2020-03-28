@@ -38,7 +38,7 @@ class ReviewController extends Controller
     }
 
     public function getReviews(Request $request){
-        $book = Book::where('id',$request->book_id)->first();
+        $book = Book::where('id',$request->book_id)->with('user')->first();
         if($book){
             $reviews = $book->reviews()->get();
             return response()->json(['reviews'=>$reviews]);
