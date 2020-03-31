@@ -29,5 +29,10 @@ Route::group(["namespace" => "Api"], function () {
         // reviews
         Route::get("/review","ReviewController@getReviews");
         Route::post("/review/create","ReviewController@create");
+
+        // bookmarks
+        Route::get('/bookmark','BookmarkController@getbookmarks');
+        Route::post("/bookmark/add","BookmarkController@add");
+        Route::post('bookmark/remove',"BookmarkController@removebookmark");
     });
 });

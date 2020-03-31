@@ -1,7 +1,10 @@
-Book::where('id',4)->reviews()->get();
-$book = Book:where('id',4)->first();
-$book = Book::where('id',4)->first();
-$book = Book::where('id',4)->first();
-$book->reviews()
-$book = Book::where('id',4)->first();
-$book->reviews()->get()
+$user = Auth::user();
+$user = User::first();
+$user = User::first();
+$user->bookmarks;
+$user = User::first();
+$user->bookmarks()->where('book_id',4)->get();
+$user = User::first();
+$user->bookmarks;
+$user = User::first();
+$user->bookmarks;
