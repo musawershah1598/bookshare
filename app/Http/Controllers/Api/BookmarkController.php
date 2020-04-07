@@ -59,4 +59,18 @@ class BookmarkController extends Controller
             }
         }
     }
+
+    public function checkbookmark(Request $request){
+        if(!isset($request->book_id)){
+           return response()->json(['error'=>"Book id not present"],422);
+        }else{
+            $user = Auth::user();
+            $bookmark = $user->bookmarks()->where('book_id',$request->book_id)->first();
+            if($bookmark){
+                return response()->json(['message'=>'Bookmarked']);
+            }else{
+                return response()->json(['message'=>"Not bookmarked"],404);
+            }
+        }
+    }
 }

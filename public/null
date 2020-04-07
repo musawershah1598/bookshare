@@ -1,10 +1,12 @@
-$user = Auth::user();
-$user = User::first();
-$user = User::first();
-$user->bookmarks;
-$user = User::first();
-$user->bookmarks()->where('book_id',4)->get();
-$user = User::first();
-$user->bookmarks;
-$user = User::first();
-$user->bookmarks;
+$user = User::where('id',4)->first();
+$user = User::where('id',4)->first();
+$user = User::where('id',1)->first();
+$user = User::where('id',1)->first();
+
+$user->bookmarks
+$user = User::where('id',1)->first();
+
+$user->bookmarks()->where('book_id',5)->first();
+$user = User::where('id',1)->first();
+
+$user->bookmarks()->where('book_id',4)->first();

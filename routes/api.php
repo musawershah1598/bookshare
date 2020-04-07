@@ -32,6 +32,7 @@ Route::group(["namespace" => "Api"], function () {
 
         // bookmarks
         Route::get('/bookmark','BookmarkController@getbookmarks');
+        Route::get('/bookmark/check',"BookmarkController@checkbookmark");
         Route::post("/bookmark/add","BookmarkController@add");
         Route::post('bookmark/remove',"BookmarkController@removebookmark");
     });
