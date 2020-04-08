@@ -1,12 +1,98 @@
-$user = User::where('id',4)->first();
-$user = User::where('id',4)->first();
-$user = User::where('id',1)->first();
-$user = User::where('id',1)->first();
-
-$user->bookmarks
-$user = User::where('id',1)->first();
-
-$user->bookmarks()->where('book_id',5)->first();
 $user = User::where('id',1)->first();
 
 $user->bookmarks()->where('book_id',4)->first();
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book','genre')->get();
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$genre = $b->book->genre;
+  $b['genre'] = $genre;
+}
+
+$bookmarks;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$genre = $b->book->genre;
+  $b['genre'] = $genre;
+}
+
+$bookmarks;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+
+
+$bookmarks;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$b->genre;
+}
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	print_r($b->genre);
+}
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+$bookmarks[0];
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+$bookmarks[0]->genre;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+$bookmarks[0]->book->genre;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->with('genre')->get();
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$b->genre;
+}
+
+$bookmarks;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$b['genre'] = $b->genre;
+}
+
+$bookmarks;
+$user = User::where('id',1)->first();
+
+$bookmarks = $user->bookmarks()->with('book')->get();
+
+foreach($bookmarks as $b){
+	$b['genre'] = $b->book->genre;
+}
+
+$bookmarks;
