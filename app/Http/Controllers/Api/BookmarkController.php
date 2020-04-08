@@ -53,7 +53,8 @@ class BookmarkController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->all(),422);
         }else{
-            $bookmark = Bookmarks::where('id',$request->id)->first();
+			$user = Auth::user();
+            $bookmark = Bookmarks::where('book_id',$request->id)->where('user_id',$user->id)->first();
             if($bookmark){
                 $bookmark->delete();
                 return response()->json(['message'=>"Bookmark removed."]);
