@@ -1,98 +1,73 @@
-$user = User::where('id',1)->first();
+use Carbon\Carbon;
+$users = User::select('id', 'created_at')
+->get()
+->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('m'); });
 
-$user->bookmarks()->where('book_id',4)->first();
-$user = User::where('id',1)->first();
+$usermcount = [];
+$userArr = [];
 
-$bookmarks = $user->bookmarks()->with('book')->get();
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book','genre')->get();
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	$genre = $b->book->genre;
-  $b['genre'] = $genre;
+foreach ($users as $key => $value) {
+    $usermcount[(int)$key] = count($value);
 }
 
-$bookmarks;
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	$genre = $b->book->genre;
-  $b['genre'] = $genre;
+for($i = 1; $i <= 12; $i++){
+    if(!empty($usermcount[$i])){
+        $userArr[$i] = $usermcount[$i];    
+    }else{
+        $userArr[$i] = 0;    
+    }
 }
 
-$bookmarks;
-$user = User::where('id',1)->first();
+$userArr;
+use Carbon\Carbon;
+$users = User::select('id', 'created_at')
+->get()
+->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('m'); });
 
-$bookmarks = $user->bookmarks()->with('book')->get();
+$usermcount = [];
+$userArr = [];
 
-
-
-$bookmarks;
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	$b->genre;
-}
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	print_r($b->genre);
-}
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-$bookmarks[0];
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-$bookmarks[0]->genre;
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-$bookmarks[0]->book->genre;
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->with('genre')->get();
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	$b->genre;
+foreach ($users as $key => $value) {
+    $usermcount[(int)$key] = count($value);
 }
 
-$bookmarks;
-$user = User::where('id',1)->first();
-
-$bookmarks = $user->bookmarks()->with('book')->get();
-
-foreach($bookmarks as $b){
-	$b['genre'] = $b->genre;
+for($i = 1; $i <= 12; $i++){
+    if(!empty($usermcount[$i])){
+        $userArr[$i] = $usermcount[$i];    
+    }else{
+        $userArr[$i] = 0;    
+    }
 }
 
-$bookmarks;
-$user = User::where('id',1)->first();
+array_values($userArr);
+use Carbon\Carbon;
+$users = Book::select('id', 'created_at')
+->get()
+->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('m'); });
 
-$bookmarks = $user->bookmarks()->with('book')->get();
+$usermcount = [];
+$userArr = [];
 
-foreach($bookmarks as $b){
-	$b['genre'] = $b->book->genre;
+foreach ($users as $key => $value) {
+    $usermcount[(int)$key] = count($value);
 }
 
-$bookmarks;
+for($i = 1; $i <= 12; $i++){
+    if(!empty($usermcount[$i])){
+        $userArr[$i] = $usermcount[$i];    
+    }else{
+        $userArr[$i] = 0;    
+    }
+}
+
+array_values($userArr);
+$user = User::all();
+$user = User::all()->take(1);
+$user = User::all()->take(2);
+$user = User::all()->take(5);
+$user = User::orderBy('created_at')->take(5);
+$user = User::orderBy('created_at')->take(5)->get();
+$user = User::orderBy('created_at','DESC')->take(5)->get();

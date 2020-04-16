@@ -1,0 +1,11 @@
+#navbar {
+    background: #273c75;
+    height: 40vh;
+}
+#navbar img {
+    height: 5vh;
+}
+
+div.col-md-10 {
+    padding: 0;
+}

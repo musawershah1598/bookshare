@@ -1,0 +1,43 @@
+body {
+    background-color: #f4f6f9;
+    color: #283267;
+}
+.btn-primary {
+    background-color: #283267;
+    border-color: #283267;
+}
+.btn-primary:hover {
+    background-color: #283262;
+    margin-top: -2px;
+}
+#content {
+    margin-top: -25vh;
+}
+
+#sidebar {
+    background: white;
+    border-right: 1px solid #eee;
+    min-height: 100vh;
+    padding: 0;
+}
+#sidebar .list-group-item {
+    padding: 1vh 0;
+    font-size: 4vh;
+    border-right: 0;
+}
+#sidebar .header img {
+    height: 10vh;
+}
+#sidebar .header h3 {
+    color: #e17055;
+}
+#sidebar .list-group-item h6 {
+    display: inline-block;
+    margin-left: 1vw;
+    color: #bbb;
+    font-weight: lighter;
+}
+#sidebar img {
+    height: 3vh;
+    margin-left: 1vw;
+}

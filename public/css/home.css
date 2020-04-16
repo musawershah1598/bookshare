@@ -1,0 +1,30 @@
+.numbers {
+    margin-bottom: 3vh;
+}
+.numbers .card {
+    height: 13vh;
+}
+.numbers .card-body {
+    padding-top: 2vh;
+}
+.numbers .card .card-title {
+    margin-bottom: 0;
+}
+.numbers .card .image {
+    width: 8vh;
+    float: right;
+    border-radius: 50%;
+}
+
+#user_chart,
+#book_chart {
+    width: 100%;
+    height: 40vh;
+}
+
+#data-cards thead {
+    background-color: #f6f9fc;
+}
+#data-cards .card {
+    height: 50vh;
+}

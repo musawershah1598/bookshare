@@ -1,6 +1,9 @@
 body {
     font-family: "Noto Sans", sans-serif;
 }
+nav.navbar {
+    background: #273c75;
+}
 
 .card:first-of-type {
     margin-top: 5vh;
