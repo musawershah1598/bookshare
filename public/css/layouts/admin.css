@@ -8,7 +8,7 @@ body {
 }
 .btn-primary:hover {
     background-color: #283262;
-    margin-top: -2px;
+    margin-top: -1px;
 }
 .form-control {
     box-shadow: none !important;
