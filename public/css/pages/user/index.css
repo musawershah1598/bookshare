@@ -1,0 +1,16 @@
+#main-content {
+    min-height: 70vh;
+}
+#main-content #search-table,
+#progress {
+    display: none;
+}
+/* #main-content .table {
+    text-align: center;
+} */
+#main-content .input-group {
+    width: 30%;
+}
+#main-content .table thead {
+    background: #f1f5ff;
+}

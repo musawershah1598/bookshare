@@ -17,7 +17,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
-    {{-- <script src="https://kit.fontawesome.com/9b4e0d0281.js" crossorigin="anonymous"></script> --}}
+    <script src="https://kit.fontawesome.com/9b4e0d0281.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -43,7 +43,7 @@
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/user.svg')}}" alt="user icon">
-                        <a href="#">
+                        <a href="{{route('user.index')}}">
                             <h6>Users</h6>
                         </a>
                     </li>
@@ -66,11 +66,18 @@
                 <div class="container-fluid" id='content'>
                     @yield('content')
                 </div>
+                <div class="container m-5">
+                    <p><span class="text-muted">&copy;2020</span> <b>BookShare</b></p>
+                </div>
             </div>
         </div>
     </div>
 
     @yield('scripts')
+
+    <script>
+        $(".alert").not('.alert-important').delay(3000).fadeOut(1000);
+    </script>
 </body>
 
 </html>

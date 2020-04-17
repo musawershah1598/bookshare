@@ -89,7 +89,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="d-inline-block">New Users</h5>
-                <a href="" class="btn btn-sm btn-primary float-right">
+                <a href="{{route('user.index')}}" class="btn btn-sm btn-primary float-right">
                     See all
                 </a>
                 <hr>
@@ -139,10 +139,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <p><span class="text-muted">&copy;2020</span> <b>BookShare</b></p>
 </div>
 
 @endsection

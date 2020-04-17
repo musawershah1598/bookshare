@@ -10,6 +10,9 @@ body {
     background-color: #283262;
     margin-top: -2px;
 }
+.form-control {
+    box-shadow: none !important;
+}
 #content {
     margin-top: -25vh;
 }

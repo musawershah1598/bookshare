@@ -25,5 +25,9 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('genre',"GenreController");
     Route::resource('book',"BookController");
+
+    // user
+    Route::resource('user',"UserController");
+    Route::post('/user/search',"UserController@search")->name('user.search');
 });
 
