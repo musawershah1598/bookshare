@@ -94,4 +94,37 @@ class GenreController extends Controller
         flash("Genre Deleted succesfully")->error();
         return redirect()->route('genre.index');
     }
+
+    public function search(Request $request){
+        $term = $request->search;
+        $genres = Genre::where('name',"LIKE",'%'.$term."%")->get();
+        if(count($genres) > 0){
+            $output = "";
+            foreach($genres as $key=>$genre){
+                $showRoute = route('genre.show',$genre);
+                $deleteRoute = route('genre.destroy',$genre);
+                $token = csrf_token();
+                $output.="<tr>";
+                $output.="<td>".($key + 1)."</td>";
+                $output.= <<<_END
+<td><b>$genre->name</b></td>
+<td class="text-center">
+    <a href="$showRoute" class="btn btn-primary hvr-shadow btn-sm"> <i
+    class="far fa-eye"></i>
+    <span>Show</span></a>
+    <form method="POST" action="$deleteRoute" class="d-inline-block mt-2" onsubmit="return confirm('Are you sure want to delete this genre?')">
+        <input type="hidden" name="_token" value="$token" />
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="btn btn-danger btn-sm hvr-shadow">
+            <i class="far fa-trash-alt"></i> Delete
+        </button>
+    </form>
+</td>
+_END;
+            return response($output);
+            }
+        }else{
+            return response()->json(['message'=>'not found'],404);
+        }
+    }
 }

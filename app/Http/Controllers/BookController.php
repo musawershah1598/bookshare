@@ -165,4 +165,40 @@ class BookController extends Controller
         flash("Book Deleted succesfully")->error();
         return redirect()->back();
     }
+
+    public function search(Request $request){
+        $term = $request->search;
+        $books = Book::where('title',"LIKE",'%'.$term."%")->orwhere('author','LIKE','%'.$term."%")->get();
+        if(count($books) > 0){
+            $output = "";
+            foreach($books as $key=>$book){
+                $showRoute = route('book.show',$book);
+                $deleteRoute = route('book.destroy',$book);
+                $token = csrf_token();
+                $output.="<tr>";
+                $output.="<td>.".$book->id."</td>";
+                $output.=<<<_END
+<td><b>$book->title</b></td>
+<td>$book->author</td>
+<td>$book->isbn</td>
+<td class="text-center">
+    <a href="$showRoute" class="btn btn-primary btn-sm">
+        <i class="far fa-eye"></i> Show
+    </a>
+    <form action="$deleteRoute" class="d-inline-block mt-2"
+        onsubmit="return confirm('Are you sure want to delete this book?');" method="POST">
+        <input type="hidden" name="_token" value="$token" />
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="btn btn-danger btn-sm">
+            <i class="far fa-trash-alt"></i> Delete
+        </button>
+    </form>
+</td>
+_END;
+            }
+            return response($output);
+        }else{
+            return response()->json(['message'=>'not found'],404);
+        }
+    }
 }

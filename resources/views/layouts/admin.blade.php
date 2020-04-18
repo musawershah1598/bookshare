@@ -20,6 +20,7 @@
     <script src="https://kit.fontawesome.com/9b4e0d0281.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/layouts/admin.css')}}">
     <link rel="stylesheet" href="{{asset('css/includes/admin-navbar.css')}}">
@@ -55,12 +56,13 @@
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/book.svg')}}" alt="book icon">
-                        <a href="">
+                        <a href="{{route('book.index')}}">
                             <h6>Books</h6>
                         </a>
                     </li>
                 </ul>
             </div>
+
             <div class="col-md-10">
                 @include('includes.admin-navbar')
                 <div class="container-fluid" id='content'>
@@ -77,6 +79,9 @@
 
     <script>
         $(".alert").not('.alert-important').delay(3000).fadeOut(1000);
+        $(".dropdown").click(function(){
+	console.log("temp");
+});
     </script>
 </body>
 

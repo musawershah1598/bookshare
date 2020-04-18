@@ -73,12 +73,12 @@
 <div class="row mt-3 mb-4">
     <div class="col-md-6">
         <div class="card">
-            <canvas id="user_chart"></canvas>
+            <div class="card-body"><canvas id="user_chart"></canvas></div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <canvas id="book_chart"></canvas>
+            <div class="card-body"><canvas id="book_chart"></canvas></div>
         </div>
     </div>
 </div>
@@ -89,7 +89,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="d-inline-block">New Users</h5>
-                <a href="{{route('user.index')}}" class="btn btn-sm btn-primary float-right">
+                <a href="{{route('user.index')}}" class="btn btn-sm btn-primary float-right hvr-shadow">
                     See all
                 </a>
                 <hr>
@@ -116,7 +116,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="d-inline-block">New Books</h5>
-                <a href="{{route('book.index')}}" class="btn btn-sm btn-primary float-right">
+                <a href="{{route('book.index')}}" class="btn btn-sm btn-primary float-right hvr-shadow">
                     See all
                 </a>
                 <hr>

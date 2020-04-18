@@ -19,9 +19,10 @@
                 </div>
             </form>
 
-            <div class="progress mt-3" id="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            <div id="progress" class="text-center">
+                <div class="spinner-border text-primary text-center" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
             </div>
 
             <div class="mt-3 mb-3">
@@ -72,7 +73,7 @@
                                     @csrf
                                     @method("DELETE")
                                     <button class="btn btn-danger btn-sm" type="submit">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="far fa-trash-alt"></i> Delete
                                     </button>
                                 </form>
                             </td>

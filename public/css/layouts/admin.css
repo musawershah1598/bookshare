@@ -2,19 +2,30 @@ body {
     background-color: #f4f6f9;
     color: #283267;
 }
+.card {
+    border-radius: 30px;
+}
 .btn-primary {
     background-color: #283267;
     border-color: #283267;
+    color: #fff;
 }
 .btn-primary:hover {
-    background-color: #283262;
-    margin-top: -1px;
+    color: #fff;
+    background-color: #283267;
+    border-color: #283267;
+}
+.btn-primary:focus {
+    box-shadow: none !important;
 }
 .form-control {
     box-shadow: none !important;
 }
 #content {
     margin-top: -25vh;
+}
+.table thead {
+    background-color: #f1f5ff;
 }
 
 #sidebar {
@@ -37,7 +48,7 @@ body {
 #sidebar .list-group-item h6 {
     display: inline-block;
     margin-left: 1vw;
-    color: #bbb;
+    color: #283267;
     font-weight: lighter;
 }
 #sidebar img {
