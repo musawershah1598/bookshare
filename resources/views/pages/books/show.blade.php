@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="d-inline-block">{{$book->title}}</h3>
-                <a href="" class="ml-3 btn btn-primary btn-sm float-right hvr-shadow">
+                <a href="{{route('book.index')}}" class="ml-3 btn btn-primary btn-sm float-right hvr-shadow">
                     <i class="fas fa-angle-double-left"></i> Back
                 </a>
 
@@ -60,6 +60,11 @@
 
                 <p class="mt-4">Description</p>
                 <p class="text-muted">{{$book->description}}</p>
+
+                <hr>
+                <a href="{{route('book.edit',$book)}}" class="btn btn-primary btn-sm hvr-shadow">
+                    <i class="far fa-edit"></i> Edit
+                </a>
             </div>
         </div>
     </div>

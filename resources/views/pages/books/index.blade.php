@@ -70,7 +70,7 @@
                             <td>{{$book->isbn}}</td>
                             <td class="text-center">
                                 <a href="{{route('book.show',$book)}}" class="btn btn-primary btn-sm hvr-shadow">
-                                    <i class="far fa-eye"></i> Show
+                                    <i class="far fa-edit"></i> Show
                                 </a>
                                 <form action="{{route('book.destroy',$book)}}" class="d-inline-block mt-2"
                                     onsubmit="return confirm('Are you sure want to delete this book?');" method="POST">
