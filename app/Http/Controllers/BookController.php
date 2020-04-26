@@ -201,4 +201,27 @@ _END;
             return response()->json(['message'=>'not found'],404);
         }
     }
+
+    public function handleRecommended(Request $request){
+        $book = Book::where('id',$request->book_id)->first();
+        $book->recommended = $request->val;
+        $book->save();
+        return response()->json(['working'=>$book->recommended]);
+    }
+    public function handleBestSelling(Request $request){
+        $book = Book::where('id',$request->book_id)->first();
+        $book->best_selling = $request->val;
+        $book->save();
+        return response()->json(['working'=>$book->best_selling]);
+    }
+
+    public function recommended(){
+        $books = Book::where('recommended',1)->paginate(10);
+        return view('pages.books.recommended',compact('books'));
+    }
+
+    public function bestselling(){
+        $books = Book::where('best_selling',1)->paginate(10);
+        return view('pages.books.bestselling',compact('books'));
+    }
 }

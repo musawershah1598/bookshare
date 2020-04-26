@@ -45,11 +45,28 @@ body {
 #sidebar .header h3 {
     color: #e17055;
 }
-#sidebar .list-group-item h6 {
+#sidebar .list-group-item p {
     display: inline-block;
     margin-left: 1vw;
     color: #283267;
-    font-weight: lighter;
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+@media (max-width: 1000px) {
+    #sidebar .list-group-item p {
+        font-size: 1.5vw;
+    }
+}
+@media (max-width: 768px) {
+    #sidebar .list-group-item p {
+        font-size: 2vw;
+    }
+}
+@media (max-width: 520px) {
+    #sidebar .list-group-item p {
+        font-size: 3vw;
+    }
 }
 #sidebar img {
     height: 3vh;

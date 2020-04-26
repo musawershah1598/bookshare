@@ -1,12 +1,32 @@
 body {
     font-family: "Noto Sans", sans-serif;
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        url("/images/login-background.jpg");
+    background-size: cover;
 }
 nav.navbar {
     background: #273c75;
 }
 
+.btn-primary {
+    background: #273c75;
+    border-color: #273c75;
+    color: #fff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #283267;
+    border-color: #283267;
+    box-shadow: 1px 3px 10px #ccc !important;
+}
+
 .card:first-of-type {
     margin-top: 5vh;
+    padding: 20px;
+    border-radius: 15px;
 }
 .form-control {
     box-shadow: none !important;

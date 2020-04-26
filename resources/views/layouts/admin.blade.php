@@ -39,25 +39,37 @@
                     <li class="list-group-item">
                         <img src="{{asset('icons/home.svg')}}" alt="home icon">
                         <a href="{{route('home')}}">
-                            <h6>Home</h6>
+                            <p>Home</p>
                         </a>
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/user.svg')}}" alt="user icon">
                         <a href="{{route('user.index')}}">
-                            <h6>Users</h6>
+                            <p>Users</p>
                         </a>
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/category.svg')}}" alt="category icon">
                         <a href="{{route('genre.index')}}">
-                            <h6>Category</h6>
+                            <p>Category</p>
                         </a>
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/book.svg')}}" alt="book icon">
                         <a href="{{route('book.index')}}">
-                            <h6>Books</h6>
+                            <p>Books</p>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <img src="{{asset('icons/recommended.svg')}}" alt="recommended">
+                        <a href="{{route('book.recommended')}}">
+                            <p>Recommended Books</p>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <img src="{{asset('icons/best-seller.svg')}}" alt="best seller">
+                        <a href="{{route('book.bestselling')}}">
+                            <p>Best Selling Books</p>
                         </a>
                     </li>
                 </ul>

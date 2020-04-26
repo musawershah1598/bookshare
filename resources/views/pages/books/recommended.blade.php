@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="{{asset('dist/toastr.min.css')}}">
 <script src="{{asset('dist/toastr.min.js')}}"></script>
 <style>
+    #main-container .card {
+        min-height: 50vh;
+    }
+
     #search-table,
     #spinner {
         display: none;
@@ -13,19 +17,17 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" id="main-container">
     <div class="card">
         <div class="card-body">
-            <h3 class="d-inline-block">All Books</h3>
-            <a href="{{route('book.create')}}" class="btn btn-primary btn-sm float-right hvr-shadow"><i
-                    class="fas fa-plus"></i>
-                Create</a>
+            <h3 class="d-inline-block">Recommended Books</h3>
 
-            <form class="mt-3" onsubmit="formSubmit(event)">
+
+            {{-- <form class="mt-3" onsubmit="formSubmit(event)">
                 <div class="input-group input-group-sm w-25">
                     <input type="text" class="form-control" id="search" placeholder="search for a book">
                 </div>
-            </form>
+            </form> --}}
 
             <div id="spinner" class="text-center">
                 <div class="spinner-border text-primary text-center" role="status">
@@ -63,7 +65,6 @@
                         <th>Author</th>
                         <th>ISBN</th>
                         <th>Recommended</th>
-                        <th>Best Selling</th>
                         <th class="text-center">Actions</th>
                     </thead>
                     <tbody>
@@ -84,19 +85,6 @@
                                         checked>
                                     @endif
                                     <label class="switcher" for="recommended{{$book->id}}"></label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-switcher form-switcher-lg form-switcher-sm-phone">
-                                    @if($book->best_selling == 0)
-                                    <input type="checkbox" class="bestselling" name="bestselling"
-                                        onclick="handleBestSelling({{$book->id}})" id="bestselling{{$book->id}}">
-                                    @else
-                                    <input type="checkbox" class="bestselling" name="bestselling"
-                                        onclick="handleBestSelling({{$book->id}})" id="bestselling{{$book->id}}"
-                                        checked>
-                                    @endif
-                                    <label class="switcher" for="bestselling{{$book->id}}"></label>
                                 </div>
                             </td>
                             <td class="text-center">

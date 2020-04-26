@@ -12,7 +12,7 @@
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 })->name('welcome');
 
 // Route::get('/login', function () {
@@ -25,8 +25,15 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('genre',"GenreController");
     Route::post("/genre/search",'GenreController@search')->name('genre.search');
+
+    //books
+    Route::get('/book/recommended',"BookController@recommended")->name('book.recommended');
+    Route::get('/book/bestselling',"BookController@bestselling")->name('book.bestselling');
     Route::resource('book',"BookController");
     Route::post("/book/search","BookController@search")->name('book.search');
+    Route::post('/book/handlerecommended','BookController@handleRecommended')->name('book.handle.recommended');
+    Route::post('/book/handlebestselling','BookController@handleBestSelling')->name('book.handle.bestselling');
+    
     // user
     Route::resource('user',"UserController");
     Route::post('/user/search',"UserController@search")->name('user.search');
