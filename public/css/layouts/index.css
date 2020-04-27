@@ -4,7 +4,7 @@ body {
             rgba(255, 255, 255, 0.5),
             rgba(255, 255, 255, 0.5)
         ),
-        url("/images/login-background.jpg");
+        url("../../images/login-background.jpg");
     background-size: cover;
 }
 nav.navbar {
