@@ -17,11 +17,11 @@
                 <i class="fas fa-angle-double-left"></i> Back
             </a>
 
-            <form class="mt-3" onsubmit="formSubmit(event)">
+            {{-- <form class="mt-3" onsubmit="formSubmit(event)">
                 <div class="input-group input-group-sm w-25">
                     <input type="text" class="form-control" id="search" placeholder="search for a book">
                 </div>
-            </form>
+            </form> --}}
 
             <div class="m-3">
                 @include("flash::message")
