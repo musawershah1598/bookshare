@@ -1,73 +1,89 @@
-use Carbon\Carbon;
-$users = User::select('id', 'created_at')
-->get()
-->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('m'); });
-
-$usermcount = [];
-$userArr = [];
-
-foreach ($users as $key => $value) {
-    $usermcount[(int)$key] = count($value);
-}
-
-for($i = 1; $i <= 12; $i++){
-    if(!empty($usermcount[$i])){
-        $userArr[$i] = $usermcount[$i];    
-    }else{
-        $userArr[$i] = 0;    
-    }
-}
-
-$userArr;
-use Carbon\Carbon;
-$users = User::select('id', 'created_at')
-->get()
-->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('m'); });
-
-$usermcount = [];
-$userArr = [];
-
-foreach ($users as $key => $value) {
-    $usermcount[(int)$key] = count($value);
-}
-
-for($i = 1; $i <= 12; $i++){
-    if(!empty($usermcount[$i])){
-        $userArr[$i] = $usermcount[$i];    
-    }else{
-        $userArr[$i] = 0;    
-    }
-}
-
-array_values($userArr);
-use Carbon\Carbon;
-$users = Book::select('id', 'created_at')
-->get()
-->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('m'); });
-
-$usermcount = [];
-$userArr = [];
-
-foreach ($users as $key => $value) {
-    $usermcount[(int)$key] = count($value);
-}
-
-for($i = 1; $i <= 12; $i++){
-    if(!empty($usermcount[$i])){
-        $userArr[$i] = $usermcount[$i];    
-    }else{
-        $userArr[$i] = 0;    
-    }
-}
-
-array_values($userArr);
-$user = User::all();
-$user = User::all()->take(1);
-$user = User::all()->take(2);
-$user = User::all()->take(5);
-$user = User::orderBy('created_at')->take(5);
-$user = User::orderBy('created_at')->take(5)->get();
-$user = User::orderBy('created_at','DESC')->take(5)->get();
+$reviews = Reviews::with('books');
+$reviews = Review::with('books');
+$reviews = Review::with('books')->get();
+$reviews = Review::with('books')->all();
+$reviews = Review::with('books')->count();
+$reviews = Review::with('books')->get();
+$reviews = Review::with('books')->get();
+$reviews = Review::with('books')->get();
+$reviews = Review::with('book')->get();
+$reviews = Review::with('book')->where('book.author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('books.author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('book.author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('reviews.book.author','LIKE','Vishwas')->get();
+$reviews = Review::with('book')->where('reviews.books.author','LIKE','Vishwas')->get();
+$reviews = Review::with('books')->get();
+$reviews = Review::with('book')->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('author','LIKE','Vishwas');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('rating','LIKE','Pro');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('rating','LIKE','5');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('title','LIKE','5');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('title','LIKE','hello');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('title','LIKE','pro');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('content','LIKE','a');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('title','LIKE','this');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('title','LIKE','me');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('author','Vishwas');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('author','mi');
+}))->get();
+$reviews = Review::with(array('book'=>function($query){
+	$query->where('author','mi')->get();
+}))->get();
+$reviews = Review::with('book')->get();
+$reviews = Review::with('book')->where('books.id','4')->get();
+$reviews = Review::with('book')->where('book.id','4')->get();
+$reviews = Review::with('book')->where('id','4')->get();
+$reviews = Review::with('book')->where('id','5')->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','like','musawer');
+}])->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%musawer%');
+}])->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%musawer%');
+}])->orWhere('content','LIKE','musawer')->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','musawer')->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','musawer')->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','%musawer%')->get();
+$reviews = Review::with(['book'=>function($query){
+	$query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','%this%')->get();
+$reviews = Review::with(['book'=>function($query){
+	return $query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','%this%')->get();
+$reviews = Review::with(['book'=>function($query){
+	return $query->where('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','%musawer%')->get();
+$reviews = Review::with(['book'=>function($query){
+	return $query->orWhere('author','LIKE','%Vishwas%');
+}])->orWhere('content','LIKE','%musawer%')->get();

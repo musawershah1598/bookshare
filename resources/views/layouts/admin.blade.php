@@ -72,6 +72,12 @@
                             <p>Best Selling Books</p>
                         </a>
                     </li>
+                    <li class="list-group-item">
+                        <img src="{{asset('icons/review.svg')}}" alt="reviews">
+                        <a href="{{route('review.index')}}">
+                            <p>Reviews</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

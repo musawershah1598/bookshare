@@ -37,5 +37,8 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
     // user
     Route::resource('user',"UserController");
     Route::post('/user/search',"UserController@search")->name('user.search');
+
+    // reviews
+    Route::resource('review',"ReviewController");
 });
 
