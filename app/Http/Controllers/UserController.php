@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Auth;
+use File;
 
 class UserController extends Controller
 {
@@ -125,5 +127,35 @@ _END;
         }else{
             return response()->json(['message'=>'not found'],404);
         }
+    }
+
+    public function profile(){
+        $user = User::where('id',Auth::user()->id)->first();
+        return view('pages.user.profile',compact('user'));
+    }
+
+    public function updateProfile(Request $request){
+        $request->validate([
+            'name'=>"required|min: 3"
+        ]);
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        if($request->avatar){
+            if($user->avatar){
+                if(is_file(public_path("/profile_images/".$user->avatar))){
+                    unlink(public_path("/profile_images/".$user->avatar));
+                }
+            }
+            $file = $request->avatar;
+            $ext = $request->avatar->getClientOriginalExtension();
+            $new_name = rand().".".$ext;
+            File::put(public_path("/profile_images/").$new_name,\file_get_contents($file));
+            $user->avatar = $new_name;
+        }
+        $user->save();
+        flash("Profile updated")->success();
+        return redirect()->route('profile');
     }
 }

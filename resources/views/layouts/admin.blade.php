@@ -78,6 +78,12 @@
                             <p>Reviews</p>
                         </a>
                     </li>
+                    <li class="list-group-item">
+                        <img src="{{asset('icons/profile.svg')}}" alt="profile image">
+                        <a href="{{ route('profile') }}">
+                            <p>Profile Settings</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

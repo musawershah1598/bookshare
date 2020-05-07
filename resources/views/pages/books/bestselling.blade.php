@@ -66,7 +66,7 @@
                         <th>Title</th>
                         <th>Author</th>
                         <th>ISBN</th>
-                        <th>Recommended</th>
+                        <!-- <th>Recommended</th> -->
                         <th>Best Selling</th>
                         <th class="text-center">Actions</th>
                     </thead>
@@ -77,7 +77,7 @@
                             <td><b>{{$book->title}}</b></td>
                             <td>{{$book->author}}</td>
                             <td>{{$book->isbn}}</td>
-                            <td>
+                            <!-- <td>
                                 <div class="form-switcher form-switcher-lg form-switcher-sm-phone">
                                     @if($book->recommended == 0)
                                     <input type="checkbox" name="recommended" class="recommended"
@@ -89,7 +89,7 @@
                                     @endif
                                     <label class="switcher" for="recommended{{$book->id}}"></label>
                                 </div>
-                            </td>
+                            </td> -->
                             <td>
                                 <div class="form-switcher form-switcher-lg form-switcher-sm-phone">
                                     @if($book->best_selling == 0)

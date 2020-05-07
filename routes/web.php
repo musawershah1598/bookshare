@@ -37,6 +37,8 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
     // user
     Route::resource('user',"UserController");
     Route::post('/user/search',"UserController@search")->name('user.search');
+    Route::get('/profile',"UserController@profile")->name('profile');
+    Route::put('/profile/update',"UserController@updateProfile")->name('profile.update');
 
     // reviews
     Route::resource('review',"ReviewController");

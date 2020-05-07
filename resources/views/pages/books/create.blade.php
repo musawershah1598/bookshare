@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('styles')
+<link rel="stylesheet" href="{{asset('dist/jquery-filestyle.min.css')}}">
+@endsection
+
 @section('content')
 <div class="container w-75">
     <div class="card">
@@ -89,8 +93,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="book">Book File</label>
+                            <br>
                             <input type="file" name="book" id="book"
-                                class="form-control-file @error('book') is-invalid  @enderror" accept=".pdf"
+                                class="jfilestyle @error('book') is-invalid  @enderror" accept=".pdf"
                                 value="{{old('book')}}">
                             @error('book')
                             <span class="invalid-feedback d-block" role="alert">
@@ -101,9 +106,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="image">Book Image</label>
+                            <label for="image">Book Image</label><br>
                             <input type="file" name="image" id="image"
-                                class="form-control-file @error('image') is-invalid  @enderror" accept=".jpg,.jpeg,.png"
+                                class="jfilestyle @error('image') is-invalid  @enderror" accept=".jpg,.jpeg,.png"
                                 value="{{old('image')}}">
                             @error('image')
                             <span class="invalid-feedback d-block" role="alert">
@@ -131,4 +136,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{asset('dist/jquery-filestyle.min.js')}}"></script>
 @endsection
