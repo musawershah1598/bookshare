@@ -145,7 +145,8 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }else{
-                $("#avatar-img").attr('src','/images/not-found.svg');
+                var not_found = "{!! asset('images/not-found.svg') !!}"
+                $("#avatar-img").attr('src',not_found);
                 toastr.error("Invalid file is given as an image",'Error',{
                     timeOut: 4000,
                     positionClass: "toast-bottom-center"
