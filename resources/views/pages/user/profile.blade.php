@@ -108,6 +108,11 @@
                                     <div class="col-md-9 col-sm-9">
                                         <input type="file" name="avatar" id="avatar" class="jfilestyle"
                                             data-input="false" accept="image/*">
+                                        @error('avatar')
+                                        <span class="d-block invalid-feedback">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

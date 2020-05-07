@@ -28,7 +28,7 @@
             </div>
 
             @if(count($reviews) > 0)
-            <div class="table-responsive mt-4">
+            <div class="table-responsive mt-5">
                 <table class="table">
                     <thead>
                         <th>No #</th>

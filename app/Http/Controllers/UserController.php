@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 use File;
 
@@ -135,9 +136,15 @@ _END;
     }
 
     public function updateProfile(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'name'=>"required|min: 3"
         ]);
+        $validator->sometimes('avatar',"mimes:jpeg,jpg,svg,png",function($input){
+            return $input->avatar != null ? true:false;
+        });
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
         $user = Auth::user();
         $user->name = $request->name;
         $user->phone = $request->phone;
