@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Genre;
+use App\Book;
 use Validator;
 
 class GenreController extends Controller
