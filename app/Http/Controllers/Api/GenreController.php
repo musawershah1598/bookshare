@@ -22,13 +22,8 @@ class GenreController extends Controller
         if($validate->fails()){
             return response()->json(['error'=>"Genre id is required"],422);
         }else{
-            $genre = Genre::where('id',$request->genre_id)->first();
-            if($genre){
-                $genre['books'] = $genre->books;
-                return response()->json(['genre'=>$genre]);
-            }else{
-                return response()->json(['books'=>[]],404);
-            }
+            $books = Book::where('genre_id',$request->genre_id)->with('genre')->get();
+            return response()->json(['books',$books]);
         }
     }
 }
