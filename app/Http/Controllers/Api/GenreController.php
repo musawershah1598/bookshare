@@ -24,7 +24,7 @@ class GenreController extends Controller
             return response()->json(['error'=>"Genre id is required"],422);
         }else{
             $books = Book::where('genre_id',$request->genre_id)->with('genre')->get();
-            return response()->json(['books',$books]);
+            return response()->json(['books'=>$books]);
         }
     }
 }
