@@ -24,7 +24,8 @@ class GenreController extends Controller
         }else{
             $genre = Genre::where('id',$request->genre_id)->first();
             if($genre){
-                return response()->json(['books'=>$genre->books]);
+                $genre['books'] = $genre->books;
+                return response()->json(['genre'=>$genre]);
             }else{
                 return response()->json(['books'=>[]],404);
             }
