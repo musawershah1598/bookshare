@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="isbn">ISBN</label>
                             <input type="text" class="form-control @error('isbn') is-invalid  @enderror" name="isbn"
@@ -60,17 +60,34 @@
 
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="genre">Genre</label>
-                            <select name="genre" id="genre" class="form-control @error('genre') is-invalid  @enderror">
-                                <option value=""></option>
+                            <select name="genre" id="genre" class="form-control @error('genre') is-invalid  @enderror"
+                                onchange="getSubCategory(this)">
+                                <option value="">Select Category</option>
                                 @foreach($genres as $genre)
                                 <option value="{{$genre->id}}">{{$genre->name}}</option>
                                 @endforeach
                             </select>
                             @error('genre')
                             <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="subcategory">Sub Category</label>
+                            <select name="subcategory" id="subcategory"
+                                class="form-control @error('subcategory') is-invalid @enderror">
+                            </select>
+                            @error('subcategory')
+                            <span class="invalid-feedback d-block">
                                 <strong>{{$message}}</strong>
                             </span>
                             @enderror
@@ -140,4 +157,21 @@
 
 @section('scripts')
 <script src="{{asset('dist/jquery-filestyle.min.js')}}"></script>
+
+<script>
+    function getSubCategory(event){
+        var catId = event.value;
+        var url = "{{route('subcategory.get')}}";
+        $.ajax({
+            url: url,
+            method: "GET",
+            data: {
+                catId: catId
+            },
+            success: function(val){
+                $("#subcategory").html(val);
+            }
+        });
+    }
+</script>
 @endsection

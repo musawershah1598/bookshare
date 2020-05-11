@@ -10,6 +10,10 @@ class Book extends Model
         return $this->belongsTo("App\Genre");
     }
 
+    public function subcategory(){
+        return $this->belongsTo("App\SubCategory");
+    }
+
     public function user(){
         return $this->belongsTo("App\User");
     }

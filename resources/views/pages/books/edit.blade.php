@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('styles')
+<link rel="stylesheet" href="{{asset('dist/jquery-filestyle.min.css')}}">
+@endsection
+
 @section('content')
 <div class="container w-75">
     <div class="card">
@@ -41,27 +45,32 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="author">Author</label>
-                            <input type="text" name="author" id="author" value="{{$book->author}}"
-                                class="form-control @error('author') is-invalid @enderror">
-                            @error('author')
+                            <label for="isbn">ISBN</label>
+                            <input type="text" name="isbn" id="isbn" value="{{$book->isbn}}"
+                                class="form-control @error('isbn') is-invalid @enderror">
+                            @error('isbn')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>
                             @enderror
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="genre">Genre</label>
-                            <select name="genre" id="genre" class="form-control @error('genre') is-invalid @enderror">
+                            <select name="genre" id="genre" class="form-control @error('genre') is-invalid @enderror"
+                                onchange="getSubCategory(this)">
                                 @foreach($genres as $genre)
                                 @if($genre->id != $book->genre->id)
                                 <option value="{{$genre->id}}">{{$genre->name}}</option>
                                 @else
-                                <option value="{{$genre->id}}" selected>{{$genre->name}}</option>
+                                <option value="{{$genre->id}}" style="background: #ccc" selected>{{$genre->name}}
+                                </option>
                                 @endif
 
                                 @endforeach
@@ -73,10 +82,21 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="subcategory">Sub Category</label>
+                            <select name="subcategory" id="subcategory" class="form-control">
+                                @foreach($book->genre->subcategories as $item)
+                                @if($item->id != $book->subcategory_id)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @else
+                                <option value="{{$item->id}}" style="background: #ccc" selected>{{$item->name}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
-
-
-
 
                 <div class="form-group">
                     <label for="no_of_pages">No Of Pages</label>
@@ -94,7 +114,7 @@
                         <div class="form-group">
                             <label for="book">Book File</label>
                             <input type="file" name="book" id="book"
-                                class="form-control-file @error('book') is-invalid @enderror" accept=".pdf">
+                                class="jfilestyle @error('book') is-invalid @enderror" accept=".pdf">
                             @error('book')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
@@ -106,7 +126,7 @@
                         <div class="form-group">
                             <label for="image">Cover Image</label>
                             <input type="file" name="image" id="image"
-                                class="form-control-file @error('image') is-invalid @enderror" accept=".jpeg,.jpg,.png">
+                                class="jfilestyle @error('image') is-invalid @enderror" accept=".jpeg,.jpg,.png">
                             @error('image')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
@@ -131,4 +151,25 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{asset('dist/jquery-filestyle.min.js')}}"></script>
+
+<script>
+    function getSubCategory(event){
+        var catId = event.value;
+        var url = "{{route('subcategory.get')}}";
+        $.ajax({
+            url: url,
+            method: "GET",
+            data: {
+                catId: catId
+            },
+            success: function(val){
+                $("#subcategory").html(val);
+            }
+        });
+    }
+</script>
 @endsection

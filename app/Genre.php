@@ -10,4 +10,8 @@ class Genre extends Model
     public function books(){
         return $this->hasMany("App\Book");
     }
+
+    public function subcategories(){
+        return $this->hasMany("App\SubCategory");
+    }
 }

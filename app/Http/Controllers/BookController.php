@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Genre;
+use App\SubCategory;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -46,6 +47,7 @@ class BookController extends Controller
             'author'=>"required",
             'isbn'=>"required",
             'genre'=>"required",
+            'subcategory'=> "required",
             'no_of_pages'=>"required|numeric",
             "book"=>"required|mimes:pdf",
             'image'=>"required|mimes:jpeg,jpg,png",
@@ -56,6 +58,7 @@ class BookController extends Controller
         $book->author = $request->author;
         $book->description = $request->description;
         $book->isbn = $request->isbn;
+        $book->sub_category_id = $request->subcategory;
         $book->user_id = Auth::user()->id;
         $book->pages = $request->no_of_pages;
         $new_name = rand().".".$request->book->extension();
@@ -107,6 +110,7 @@ class BookController extends Controller
             "author"=>"required",
             "isbn"=>"required",
             'genre'=>"required",
+            'subcategory'=>"required",
             'no_of_pages'=>"required",
             "description"=>"required|min:10"
         ]);
@@ -129,6 +133,7 @@ class BookController extends Controller
                 \Storage::move("public/book_images/".$beforeBook->genre->name."/".$beforeBook->photo,"public/book_images/".$genre->name."/".$book->photo);
             }
             $book->genre_id = $request->genre;
+            $book->subcategory_id = $request->subcategory;
             $book->pages = $request->no_of_pages;
             $book->description = $request->description;
             if($request->exists('book')){

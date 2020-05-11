@@ -42,5 +42,16 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
 
     // reviews
     Route::resource('review',"ReviewController");
+
+    // Sub categories
+    Route::group(['prefix'=>'subcategory'],function(){
+        Route::get('/',"SubCategoryController@index")->name('subcategory.index');
+        Route::get('/create',"SubCategoryController@create")->name('subcategory.create');
+        Route::post('/store',"SubCategoryController@store")->name('subcategory.store');
+        Route::get('/edit/{subcategory}',"SubCategoryController@edit")->name('subcategory.edit');
+        Route::put('/update/{subcategory}',"SubCategoryController@update")->name('subcategory.update');
+        Route::delete('/delete/{subcategory}',"SubCategoryController@delete")->name('subcategory.delete');
+        Route::get('/get',"SubCategoryController@getsubcategory")->name('subcategory.get');
+    });
 });
 

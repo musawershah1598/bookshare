@@ -55,6 +55,12 @@
                         </a>
                     </li>
                     <li class="list-group-item">
+                        <img src="{{asset('icons/subcategory.svg')}}" alt="sub category">
+                        <a href="{{route('subcategory.index')}}">
+                            <p>Sub Category</p>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <img src="{{asset('icons/book.svg')}}" alt="book icon">
                         <a href="{{route('book.index')}}">
                             <p>Books</p>
