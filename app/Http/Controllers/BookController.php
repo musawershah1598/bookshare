@@ -58,7 +58,7 @@ class BookController extends Controller
         $book->author = $request->author;
         $book->description = $request->description;
         $book->isbn = $request->isbn;
-        $book->sub_category_id = $request->subcategory;
+        $book->subcategory_id = $request->subcategory;
         $book->user_id = Auth::user()->id;
         $book->pages = $request->no_of_pages;
         $new_name = rand().".".$request->book->extension();
