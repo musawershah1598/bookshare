@@ -61,7 +61,7 @@ class AuthorController extends Controller
         $author->address = $request->address;
         $author->description = $request->about;
         
-        if($author->avatar){
+        if($request->avatar){
             $avatarName = rand().".".$request->avatar->extension();
             $path = \Storage::putFileAs("public/author_images/",$request->file('avatar'),$avatarName);
             $author->avatar = $avatarName;

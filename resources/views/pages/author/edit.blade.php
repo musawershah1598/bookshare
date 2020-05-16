@@ -128,7 +128,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary hvr-shadow">Create</button>
+                <button type="submit" class="btn btn-primary hvr-shadow">Update</button>
             </form>
         </div>
     </div>
