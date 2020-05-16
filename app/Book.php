@@ -25,4 +25,8 @@ class Book extends Model
     public function bookmarks(){
         return $this->hasMany("App\Bookmarks");
     }
+
+    public function author(){
+        return $this->belongsTo("App\Author");
+    }
 }

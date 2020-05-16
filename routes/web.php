@@ -53,5 +53,8 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
         Route::delete('/delete/{subcategory}',"SubCategoryController@delete")->name('subcategory.delete');
         Route::get('/get',"SubCategoryController@getsubcategory")->name('subcategory.get');
     });
+
+    // author
+    Route::resource('author',"AuthorController");
 });
 

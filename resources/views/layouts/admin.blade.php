@@ -61,6 +61,12 @@
                         </a>
                     </li>
                     <li class="list-group-item">
+                        <img src="{{asset('icons/author.svg')}}" alt="author">
+                        <a href="{{route('author.index')}}">
+                            <p>Authors</p>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <img src="{{asset('icons/book.svg')}}" alt="book icon">
                         <a href="{{route('book.index')}}">
                             <p>Books</p>

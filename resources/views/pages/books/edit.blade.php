@@ -2,6 +2,20 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{asset('dist/jquery-filestyle.min.css')}}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-selection__rendered {
+        line-height: 31px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 34px !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -33,8 +47,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <input type="text" name="author" id="author" value="{{$book->author}}"
+                            <select name="author" id="author"
                                 class="form-control @error('author') is-invalid @enderror">
+                                @if(count($authors) > 0)
+                                @foreach($authors as $author)
+                                @if($author->id != $book->author_id)
+                                <option value="{{$author->id}}">{{$author->name}}</option>
+                                @else
+                                <option value="{{$author->id}}" selected>{{$author->name}}</option>
+                                @endif
+                                @endforeach
+                                @else
+                                <option value="">No author found</option>
+                                @endif
+                            </select>
                             @error('author')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{$message}}</strong>
@@ -155,8 +181,13 @@
 
 @section('scripts')
 <script src="{{asset('dist/jquery-filestyle.min.js')}}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
+    $(document).ready(function(){
+        $("#genre").select2();
+        $("#author").select2();
+        $("#subcategory").select2();
+    });
     function getSubCategory(event){
         var catId = event.value;
         var url = "{{route('subcategory.get')}}";
