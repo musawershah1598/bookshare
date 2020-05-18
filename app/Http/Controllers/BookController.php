@@ -52,7 +52,7 @@ class BookController extends Controller
             'genre'=>"required",
             'subcategory'=> "required",
             'no_of_pages'=>"required|numeric",
-            "book"=>"required|mimes:pdf",
+            "book"=>"required|mimes:pdf,epub",
             'image'=>"required|mimes:jpeg,jpg,png",
             "description"=>"required|min: 10"
         ]);
@@ -128,7 +128,7 @@ class BookController extends Controller
             'no_of_pages'=>"required",
             "description"=>"required|min:10"
         ]);
-        $validator->sometimes('book','mimes:pdf',function($input){
+        $validator->sometimes('book','mimes:pdf,epub',function($input){
             return $input->book != null ? true: false;
         });
         $validator->sometimes('image',"mimes:jpg,jpeg,png",function($input){
