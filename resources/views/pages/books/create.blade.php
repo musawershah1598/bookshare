@@ -34,7 +34,7 @@
             <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control @error('title') is-invalid  @enderror" name="title"
@@ -46,28 +46,29 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+
+                <div class="row mb-3">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="author">Author</label>
-                            <select name="author" id="author"
-                                class="form-control @error('author') is-invalid @enderror">
-                                <option value="">Select an author</option>
-                                @if(count($authors) > 0)
-                                @foreach($authors as $author)
-                                <option value="{{$author->id}}">{{$author->name}}</option>
-                                @endforeach
-                                @else
-                                <option value="">
-                                    No author found
-                                </option>
-                                @endif
-                            </select>
-                            @error('author')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{$message}}</strong>
-                            </span>
-                            @enderror
+                        <label for="author_type">Author Type</label><br>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="author_type" value="0"> New
+                            </label>
                         </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="author_type" value="1"> Existing
+                            </label>
+                        </div>
+                        @error('author_type')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6" id="author_type">
+
                     </div>
                 </div>
 
@@ -185,9 +186,47 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function(){
-        $("#author").select2();
         $("#genre").select2();
         $("#subcategory").select2();
+
+        $("input[name='author_type']").on('change',function(el){
+            var val = el.target.value;
+            if(val == 0){
+                $("#author_type").html('');
+                $("#author_type").append(`
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" name="author" placeholder="enter author name">
+                </div>
+                `);
+            }else{
+                $("#author_type").html('');
+                $("#author_type").append(
+                    `<div class="form-group">
+                            <label for="author">Author</label>
+                            <select name="author" id="author"
+                                class="form-control @error('author') is-invalid @enderror">
+                                <option value="">Select an author</option>
+                                @if(count($authors) > 0)
+                                @foreach($authors as $author)
+                                <option value="{{$author->id}}">{{$author->name}}</option>
+                                @endforeach
+                                @else
+                                <option value="">
+                                    No author found
+                                </option>
+                                @endif
+                            </select>
+                            @error('author')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                            @enderror
+                    </div>`
+                );
+                $("select[id='author']").select2();
+            }
+        })
     });
     function getSubCategory(event){
         var catId = event.value;

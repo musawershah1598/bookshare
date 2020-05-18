@@ -45,6 +45,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        @if($book->author_type == 1)
                         <div class="form-group">
                             <label for="author">Author</label>
                             <select name="author" id="author"
@@ -67,6 +68,17 @@
                             </span>
                             @enderror
                         </div>
+                        @else
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input type="text" class="form-control" value="{{$book->author}}" name="author">
+                            @error('author')
+                            <span class="invalid-feedback d-block">
+                                <strong>{{$message}}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        @endif
                     </div>
                 </div>
 

@@ -46,6 +46,7 @@ class BookController extends Controller
     {
         $request->validate([
             'title'=>"required|min:3",
+            'author_type'=>"required",
             'author'=>"required",
             'isbn'=>"required",
             'genre'=>"required",
@@ -58,9 +59,15 @@ class BookController extends Controller
         $book = new Book;
         $book->title = $request->title;
 
-        $author = Author::where('id',$request->author)->first();
-        $book->author_id = $author->id;
-        $book->author = $author->name;
+        $book->author_type = $request->author_type;
+        if($request->author_type == 0){
+            $book->author = $request->author;
+            $book->author_id = 0;
+        }else if($request->author_type == 1){
+            $author = Author::where('id',$request->author)->first();
+            $book->author_id = $author->id;
+            $book->author = $author->name;
+        }
 
         $book->description = $request->description;
         $book->isbn = $request->isbn;
@@ -133,9 +140,13 @@ class BookController extends Controller
             $beforeBook = clone $book;
             $book->title = $request->title;
             // author
-            $author = Author::where('id',$request->author)->first();
-            $book->author = $author->name;
-            $book->author_id = $author->id;
+            if($book->author_type == 0){
+                $book->author = $request->author;
+            }else{
+                $author = Author::where('id',$request->author)->first();
+                $book->author = $author->name;
+                $book->author_id = $author->id;
+            }
             
             $book->isbn = $request->isbn;
             if($book->genre_id != $request->genre){

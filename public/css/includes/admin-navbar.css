@@ -4,6 +4,7 @@
 }
 #navbar img {
     height: 5vh;
+    border-radius: 50%;
 }
 
 div.col-md-10 {
