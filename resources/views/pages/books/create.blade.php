@@ -3,7 +3,12 @@
 @section('styles')
 <link rel="stylesheet" href="{{asset('dist/jquery-filestyle.min.css')}}">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 <style>
+    .error {
+        color: red;
+    }
+
     .select2-selection__rendered {
         line-height: 31px !important;
     }
@@ -31,7 +36,7 @@
             <hr>
 
 
-            <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('book.store')}}" method="POST" enctype="multipart/form-data" id="form">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -184,6 +189,25 @@
 @section('scripts')
 <script src="{{asset('dist/jquery-filestyle.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+    $("#form").validate({
+        rules: {
+            title: "required",
+            author_type: "required",
+            author: "required",
+            isbn: "required",
+            genre: "required",
+            subcategory: "required",
+            no_of_pages: "required",
+            book: "required",
+            image: "required",
+            description: {
+                required: true,
+                minlength: 10
+            }
+        },
+    });
+</script>
 <script>
     $(document).ready(function(){
         $("#genre").select2();
