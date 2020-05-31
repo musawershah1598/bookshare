@@ -6,19 +6,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Book;
+use App\Author;
+use App\SubCategory;
 
 class BookController extends Controller
 {
     // getting 10 books
     public function getbooks(){
-        $books = Book::with("genre")->limit(10)->get();
-        if($books){
-            return response()->json($books,200);
-        }else{
-            $error['status'] = 404;
-            $error['message'] = "No book found";
-            return response()->json($error,404);
-        }
+        // $books = Book::with("genre")->limit(10)->get();
+        $newest = Book::with('genre')->limit(10)->orderBy("created_at","DESC")->get();
+        $recommended = Book::with('genre')->where('recommended',1)->orderBy("created_at","DESC")->get();
+        $best_selling = Book::with('genre')->where('best_selling',1)->orderBy('created_at',"DESC")->get();
+        $authors = Author::orderBy('created_at',"DESC")->get();
+        $subcategories = SubCategory::all();
+        $data = [
+            'newest'=>$newest,
+            'recommended'=>$recommended,
+            'best_selling'=>$best_selling,
+            'authors'=>$authors,
+            'subcategories'=>$subcategories
+        ];
+        return response()->json($data);
     }
 
     // get a single book
