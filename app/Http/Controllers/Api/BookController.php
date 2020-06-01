@@ -51,9 +51,14 @@ class BookController extends Controller
             $error['message'] = "No id is provided";
             return response()->json($error,400);
         }
-        $book = Book::where('id',$id)->with("genre")->first();
+        $book = Book::where('id',$id)->with("genre:id,name")->first();
         if($book){
-            return response()->json($book,200);
+            $totalReviews = $book->reviews()->count();
+            $topReviews = $book->reviews()->with("user:id,name,avatar")->limit(3)->orderBy("created_at","DESC")->get();
+            $data['book'] = $book;
+            $data['totalReviews'] = $totalReviews;
+            $data['topReviews'] = $topReviews;
+            return response()->json($data,200);
         }else{
             $error['status'] = 404;
             $error['message'] = "No book found";
@@ -63,7 +68,14 @@ class BookController extends Controller
 
     public function search(Request $request){
         $term = $request->term;
-        $books = Book::where('title',"LIKE","%".$term."%")->orWhere('author',"LIKE","%".$term."%")->with('genre')->get();
+        if(!$term){
+            return response()->json(['message'=>"provide a search term"],422);
+        }
+        $books = Book::where('title',"LIKE","%".$term."%")
+                    ->orWhere('author',"LIKE","%".$term."%")
+                    ->with('genre:id,name')
+                    ->select("id",'title','author','genre_id','photo')
+                    ->get();
         if(count($books) > 0){
             return response()->json($books,200);
         }else{
