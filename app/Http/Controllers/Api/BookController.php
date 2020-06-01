@@ -14,11 +14,25 @@ class BookController extends Controller
     // getting 10 books
     public function getbooks(){
         // $books = Book::with("genre")->limit(10)->get();
-        $newest = Book::with('genre')->limit(10)->orderBy("created_at","DESC")->get();
-        $recommended = Book::with('genre')->where('recommended',1)->orderBy("created_at","DESC")->get();
-        $best_selling = Book::with('genre')->where('best_selling',1)->orderBy('created_at',"DESC")->get();
-        $authors = Author::orderBy('created_at',"DESC")->get();
-        $subcategories = SubCategory::all();
+        $newest = Book::with('genre:id,name')
+                    ->select('id','title','photo','genre_id')
+                    ->limit(10)
+                    ->orderBy("created_at","DESC")
+                    ->get();
+        $recommended = Book::with('genre:id,name')
+                        ->select('id','title','photo','genre_id')
+                        ->where('recommended',1)
+                        ->orderBy("created_at","DESC")
+                        ->get();
+        $best_selling = Book::with('genre:id,name')
+                        ->select('id','title','photo','genre_id')
+                        ->where('best_selling',1)
+                        ->orderBy('created_at',"DESC")
+                        ->get();
+        $authors = Author::select('id','name','avatar')
+                    ->orderBy('created_at',"DESC")
+                    ->get();
+        $subcategories = SubCategory::select('id','name','genre_id','category_name')->get();
         $data = [
             'newest'=>$newest,
             'recommended'=>$recommended,
