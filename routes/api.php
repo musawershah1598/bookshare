@@ -25,6 +25,7 @@ Route::group(["namespace" => "Api"], function () {
         Route::get("/books/search","BookController@search");
 		Route::get("/books/addview","BookController@addview");
         Route::get("/books/adddownload","BookController@adddownload");
+        Route::get('/books/all',"BookController@allBooks");
 
         // reviews
         Route::get("/review","ReviewController@getReviews");

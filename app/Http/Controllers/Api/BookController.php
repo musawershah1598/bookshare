@@ -96,5 +96,50 @@ class BookController extends Controller
 		$book->downloads = $book->downloads + 1;
 		$book->save();
 		return response()->json(['message'=>'working'],200);
-	}
+    }
+    
+    public function allBooks(Request $request){
+        $type = $request->type;
+        if($type == null){
+            return response()->json(['message'=>'provide a type'],422);;
+        }
+        $books = [];
+        switch($type){
+            case "author":
+                if($request->id == null){
+                    return response()->json(['please provide author id'],422);
+                }
+                $author = Author::where('id',$request->id)->first();
+                if($author == null){
+                    return response()->json(['author not found'],422);
+                }
+                $books = $author->books()
+                            ->with('genre:id,name')
+                            ->select('id','title','author','genre_id','photo')
+                            ->get();
+            break;
+            case "recommended":
+                $books = Book::with('genre:id,name')
+                            ->where('recommended',1)
+                            ->orderBy('created_at',"DESC")
+                            ->select('id','title','author','genre_id','photo')
+                            ->get();
+            break;
+            case "best_selling":
+                $books = Book::with('genre:id,name')
+                            ->where('best_selling',1)
+                            ->orderBy('created_at',"DESC")
+                            ->select('id','title','author','genre_id','photo')
+                            ->get();
+            break;
+            case 'newest':
+                $books = Book::with('genre:id,name')
+                            ->select('id','title','author','genre_id','photo')
+                            ->orderBy('created_at',"DESC")
+                            ->limit(30)
+                            ->get();
+            break;
+        }
+        return response()->json($books);
+    }
 }
