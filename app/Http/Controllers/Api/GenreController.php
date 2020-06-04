@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Genre;
+use App\SubCategory;
 use App\Book;
 use Validator;
 
@@ -17,14 +18,18 @@ class GenreController extends Controller
     }
     public function books(Request $request){
         $validate = Validator::make($request->all(),[
-            'genre_id'=>"required"
+            'category_id'=>"required"
         ]);
 
         if($validate->fails()){
-            return response()->json(['error'=>"Genre id is required"],422);
+            return response()->json(['error'=>"category id is required"],422);
         }else{
-            $books = Book::where('genre_id',$request->genre_id)->with('genre')->get();
-            return response()->json(['books'=>$books]);
+            $subcategory = SubCategory::where('id',$request->category_id)->first();
+            if(!$subcategory){
+                return response()->json(['error'=>"category not found"],422);
+            }
+            $books = $subcategory->books()->select('id','title','author','photo')->get();
+            return response()->json($books);
         }
     }
 }

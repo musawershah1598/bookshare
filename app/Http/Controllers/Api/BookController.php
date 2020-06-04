@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Author;
 use App\SubCategory;
+use Auth;
 
 class BookController extends Controller
 {
