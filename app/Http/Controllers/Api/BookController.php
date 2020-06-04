@@ -55,6 +55,14 @@ class BookController extends Controller
         if($book){
             $totalReviews = $book->reviews()->count();
             $topReviews = $book->reviews()->with("user:id,name,avatar")->limit(3)->orderBy("created_at","DESC")->get();
+            $user = Auth::user();
+            $isBookmarked = $user->bookmarks()->where('book_id',$book->id)->first();
+            $data = [];
+            if($isBookmarked){
+                $data['isBookmarked'] = true;
+            }else{
+                $data['isBookmarked'] = false;
+            }
             $data['book'] = $book;
             $data['totalReviews'] = $totalReviews;
             $data['topReviews'] = $topReviews;

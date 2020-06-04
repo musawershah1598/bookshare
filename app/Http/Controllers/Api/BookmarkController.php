@@ -39,9 +39,9 @@ class BookmarkController extends Controller
 
     public function getbookmarks(){
         $user = Auth::user();
-        $bookmarks = $user->bookmarks()->with('book')->get();
+        $bookmarks = $user->bookmarks()->select('id','book_id')->with('book:id,title,author,photo,genre_id')->get();
 		foreach($bookmarks as $b){
-			$b['genre'] = $b->book->genre;
+			$b['genre'] = $b->book->genre()->select('id','name')->first();
 		}
         return response()->json(['bookmarks'=>$bookmarks]);
     }
