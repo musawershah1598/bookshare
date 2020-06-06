@@ -3,6 +3,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{asset('dist/jquery-filestyle.min.css')}}">
 <link rel="stylesheet" href="{{asset('dist/toastr.min.css')}}">
+<script src="{{asset('dist/toastr.min.js')}}"></script>
 <style>
     .avatar {
         border-right: 1px solid #ccc;

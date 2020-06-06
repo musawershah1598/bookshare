@@ -1,0 +1,8 @@
+#main-container .card {
+    min-height: 50vh;
+}
+#main-container .not-found {
+    text-align: center;
+    margin-top: 20vh;
+    font-weight: bold;
+}

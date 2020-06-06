@@ -74,13 +74,16 @@ class BookController extends Controller
         $book->subcategory_id = $request->subcategory;
         $book->user_id = Auth::user()->id;
         $book->pages = $request->no_of_pages;
+        // storing book
         $new_name = rand().".".$request->book->extension();
         $genre = Genre::where('id',$request->genre)->first();
         $path = \Storage::putFileAs("public/books/$genre->name/",$request->file('book'),$new_name);
         $book->link = $new_name;
+        // storing image
         $new_name = rand().".".$request->image->extension();
         $path = \Storage::putFileAs("public/book_images/$genre->name/",$request->file('image'),$new_name);
         $book->photo = $new_name;
+        
         $genre->books()->save($book);
         flash("Book added succesfully")->success();
         return redirect()->route('book.index');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Book;
 use App\Author;
@@ -33,13 +34,15 @@ class BookController extends Controller
         $authors = Author::select('id','name','avatar')
                     ->orderBy('created_at',"DESC")
                     ->get();
+        $slider_images = DB::table('mobile_image_slider')->select('id','photo')->get();
         $subcategories = SubCategory::select('id','name','genre_id','category_name')->get();
         $data = [
             'newest'=>$newest,
             'recommended'=>$recommended,
             'best_selling'=>$best_selling,
             'authors'=>$authors,
-            'subcategories'=>$subcategories
+            'subcategories'=>$subcategories,
+            'slider_images'=>$slider_images
         ];
         return response()->json($data);
     }

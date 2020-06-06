@@ -28,7 +28,10 @@ class GenreController extends Controller
             if(!$subcategory){
                 return response()->json(['error'=>"category not found"],422);
             }
-            $books = $subcategory->books()->select('id','title','author','photo')->get();
+            $books = $subcategory->books()
+                        ->with('genre:id,name')
+                        ->select('id','title','author','photo','genre_id')
+                        ->get();
             return response()->json($books);
         }
     }

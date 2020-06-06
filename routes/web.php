@@ -56,5 +56,13 @@ Route::group(['middleware'=>"CheckForAdmin"],function(){
 
     // author
     Route::resource('author',"AuthorController");
+
+    //mobile slider
+    Route::get("/mobile/slider","MobileSlider@index")->name('mobile.slider');
+    Route::get('/mobile/slider/create',"MobileSlider@create")->name('mobile.slider.create');
+    Route::post('/mobile/slider',"MobileSlider@store")->name('mobile.slider.store');
+    Route::get("/mobile/slider/{id}/edit","MobileSlider@edit")->name('mobile.slider.edit');
+    Route::put("/mobile/slider/{id}","MobileSlider@update")->name('mobile.slider.update');
+    Route::delete('/mobile/slider/{id}',"MobileSlider@delete")->name('mobile.slider.delete');
 });
 

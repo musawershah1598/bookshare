@@ -34,7 +34,7 @@
                 <ul class="list-group">
                     <li class="list-group-item text-center header">
                         <img src="https://iqonic.design/granth/public/storage/135/Untitled-1.png" alt="logo">
-                        <h3>BookShare</h3>
+                        <h3>Reading Nookes</h3>
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/home.svg')}}" alt="home icon">
@@ -94,6 +94,12 @@
                         <img src="{{asset('icons/profile.svg')}}" alt="profile image">
                         <a href="{{ route('profile') }}">
                             <p>Profile Settings</p>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <img src="{{asset('icons/mobile.svg')}}" alt="mobile image">
+                        <a href="{{route('mobile.slider')}}">
+                            <p>Mobile Slider</p>
                         </a>
                     </li>
                 </ul>
