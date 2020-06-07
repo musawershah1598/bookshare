@@ -87,6 +87,7 @@ class BookController extends Controller
                     ->orWhere('author',"LIKE","%".$term."%")
                     ->with('genre:id,name')
                     ->select("id",'title','author','genre_id','photo')
+                    ->limit(40)
                     ->get();
         if(count($books) > 0){
             return response()->json($books,200);
