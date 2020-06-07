@@ -109,6 +109,11 @@ class BookController extends Controller
 		$book->save();
 		return response()->json(['message'=>'working'],200);
     }
+
+    public function getAuthors(){
+        $authors = Author::select('id','name','avatar')->get();
+        return response()->json(['authors'=>$authors]);
+    }
     
     public function allBooks(Request $request){
         $type = $request->type;
@@ -128,6 +133,7 @@ class BookController extends Controller
                 $books = $author->books()
                             ->with('genre:id,name')
                             ->select('id','title','author','genre_id','photo')
+                            ->limit(30)
                             ->get();
             break;
             case "recommended":
@@ -135,6 +141,7 @@ class BookController extends Controller
                             ->where('recommended',1)
                             ->orderBy('created_at',"DESC")
                             ->select('id','title','author','genre_id','photo')
+                            ->limit(30)
                             ->get();
             break;
             case "best_selling":
@@ -142,6 +149,7 @@ class BookController extends Controller
                             ->where('best_selling',1)
                             ->orderBy('created_at',"DESC")
                             ->select('id','title','author','genre_id','photo')
+                            ->limit(30)
                             ->get();
             break;
             case 'newest':

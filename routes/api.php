@@ -19,6 +19,9 @@ Route::group(["namespace" => "Api"], function () {
         Route::put("/user","AuthController@updateUser");
         Route::post('/user/image/upload',"AuthController@uploadimage");
 
+        // authors
+        Route::get('/authors',"BookController@getAuthors");
+
         // books route
         Route::get('/book',"BookController@getbook");
         Route::get("/books","BookController@getbooks");
