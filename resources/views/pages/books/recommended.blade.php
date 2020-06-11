@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-<div class="container" id="main-container">
+<div class="container-fluid" id="main-container">
     <div class="card">
         <div class="card-body">
             <h3 class="d-inline-block">Recommended Books</h3>

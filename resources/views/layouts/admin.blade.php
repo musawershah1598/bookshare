@@ -33,8 +33,9 @@
             <div class="col-md-2" id="sidebar">
                 <ul class="list-group">
                     <li class="list-group-item text-center header">
-                        <img src="https://iqonic.design/granth/public/storage/135/Untitled-1.png" alt="logo">
-                        <h3>Reading Nookes</h3>
+                        {{-- <img src="https://iqonic.design/granth/public/storage/135/Untitled-1.png" alt="logo"> --}}
+                        <img src="{{asset('images/logo.png')}}" alt="logo">
+                        {{-- <h3>Reading Nookes</h3> --}}
                     </li>
                     <li class="list-group-item">
                         <img src="{{asset('icons/home.svg')}}" alt="home icon">
