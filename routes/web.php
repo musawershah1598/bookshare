@@ -11,9 +11,7 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', "WelcomeController@index")->name('welcome');
 
 // Route::get('/login', function () {
 //     return response()->json(['error' => "Invalid token."],400);
