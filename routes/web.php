@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -10,6 +11,8 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+Route::get('/details/{id}',"WelcomeController@details")->name('details');
 
 Route::get('/', "WelcomeController@index")->name('welcome');
 
