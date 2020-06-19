@@ -58,7 +58,10 @@
 <div class="container" id="main-container">
     <div class="card mb-5">
         <div class="card-body">
-            <h3>Book Details</h3>
+            <h3 class="d-inline-block">Book Details</h3>
+            <button class="btn btn-primary btn-sm hvr-shadow float-right" data-toggle="modal" data-target="#myModal">
+                <i class="far fa-eye"></i> Show
+            </button>
             <hr>
             @if(isset($book))
             <div class="row">
@@ -109,6 +112,18 @@
                 <h1>Book Not Found</h1>
             </div>
             @endif
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <embed src="{{asset("storage/books/".$book->genre->name."/$book->link")}}" type="application/pdf"
+                    style="width: 100%; height: 70vh">
+            </div>
         </div>
     </div>
 </div>
