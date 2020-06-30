@@ -28,6 +28,7 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        \Mail::to($user->email)->send(new \App\Mail\MobileEmailVerification($user));
         $success['token'] = $user->createToken("Laravel")->accessToken;
         $success['message']="Account Created Successfully";
         return response()->json(['success' => $success], $this->successStatus);
@@ -49,6 +50,49 @@ class AuthController extends Controller
             return response()->json($success, $this->successStatus);
         } else {
             return response()->json(['error' => "Unauthorized access"], 401);
+        }
+    }
+
+    public function resendEmail(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email' => "required|email"
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->all(),422);
+        }else{
+            $user = User::where('email',$request->email)->first();
+            if(!$user){
+                return response()->json(['message'=>"User not found"],404);
+            }else{
+                if($user->email_verified_at){
+                    return response()->json(['message'=>"Email Already verified"],400);
+                }else{
+                    \Mail::to($user->email)->send(new \App\Mail\MobileEmailVerification($user));
+                    return response()->json(['message'=>"Email Resend Successfully"]);
+                }
+            }
+        }
+    }
+
+    public function verify(Request $request){
+        $token = $request->token;
+        $user = User::where('id',$token)->first();
+        if($user){
+            if($user->email_verified_at){
+                $message = 'Email already verified';
+                $status = 422;
+                return view('pages.misc.error',compact('message','status'));
+            }else{
+                $user->email_verified_at = date("Y-m-d H:i:s");
+                $user->save();
+                $message = "Email Verified Successfully";
+                $status = 200;
+                return view('pages.misc.error',compact('message','status'));
+            }
+        }else{
+            $message = 'User not found';
+            $status = 404;
+            return view('pages.misc.error',compact('message','status'));
         }
     }
 

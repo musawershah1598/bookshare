@@ -12,6 +12,10 @@
 |
  */
 
+ Route::get('/email',function(){
+     return view('pages.misc.error');
+ });
+
 Route::get('/details/{id}',"WelcomeController@details")->name('details');
 
 Route::get('/', "WelcomeController@index")->name('welcome');
