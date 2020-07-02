@@ -15,7 +15,7 @@ Route::group(["namespace" => "Api"], function () {
     Route::post('auth/login', "AuthController@login");
     Route::post("auth/register", "AuthController@register");
     Route::get("auth/email/verify","AuthController@verify")->name("api.email.verify");
-    Route::get("auth/email/resend","AuthController@resendEmail");
+    Route::post("auth/email/resend","AuthController@resendEmail");
     Route::group(['middleware'=>"auth:api"],function(){
         Route::get('/user', "AuthController@getUser");
         Route::put("/user","AuthController@updateUser");
