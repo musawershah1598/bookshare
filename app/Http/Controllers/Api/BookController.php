@@ -50,6 +50,7 @@ class BookController extends Controller
     // get a single book
     public function getbook(Request $request){
         $id = $request->id;
+        $user_id = $request->user_id;
         if(!$id){
             $error['status'] = 400;
             $error['message'] = "No id is provided";
@@ -59,16 +60,17 @@ class BookController extends Controller
         if($book){
             $totalReviews = $book->reviews()->count();
             $topReviews = $book->reviews()->with("user:id,name,avatar")->limit(3)->orderBy("created_at","DESC")->get();
-            $isBookmarked;
-            if(Auth::check()){
-            	$user = Auth::user();
-            	$isBookmarked = $user->bookmarks()->where('book_id',$book->id)->first();
-            }
             $data = [];
-            if($isBookmarked){
-                $data['isBookmarked'] = true;
+            $user = $book->user()->where('id',$user_id)->first();
+            if($user){
+            	$isBookmarked = $user->bookmarks()->where('book_id',$book->id)->first();
+            	if($isBookmarked){
+            		$data['isBookmarked'] = true;
+            	}else{
+            		$data['isBookmarked'] = false;
+            	}
             }else{
-                $data['isBookmarked'] = false;
+            	$data['isBookmarked'] = false;
             }
             $data['book'] = $book;
             $data['totalReviews'] = $totalReviews;
