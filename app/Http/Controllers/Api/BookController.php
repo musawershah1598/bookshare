@@ -59,7 +59,7 @@ class BookController extends Controller
         if($book){
             $totalReviews = $book->reviews()->count();
             $topReviews = $book->reviews()->with("user:id,name,avatar")->limit(3)->orderBy("created_at","DESC")->get();
-            $isBookmark;
+            $isBookmark = "";
             if(Auth::check()){
             	$user = Auth::user();
             	$isBookmarked = $user->bookmarks()->where('book_id',$book->id)->first();
